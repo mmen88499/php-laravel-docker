@@ -2,10 +2,16 @@
 
 // قائمة روابط الفيديوهات
 $videoUrls = [
-    'https://www.youtube.com/embed/VIDEO_ID_1',
-    'https://www.youtube.com/embed/VIDEO_ID_2',
-    'https://www.youtube.com/embed/VIDEO_ID_3',
-    // ... Add more video URLs here
+    'https://tpr-store.blogspot.com/2024/04/Java-code-to-improve-mobile-phone-performance.html',
+    'https://tpr-store.blogspot.com/2024/04/How-to-profit-from-YouTube.html',
+    'https://tpr-store.blogspot.com/2024/04/The-Java-code-collects-application-packages-and-verifies-whether-they-are-installed-from-Google-Play-or-not.html',
+    'https://tpr-store.blogspot.com/2024/04/Profit%20from%20Telegram%20channel%20ads.html',
+'https://tpr-store.blogspot.com/2024/04/Profit%20from%20Telegram%20channel%20ads.html',
+
+
+
+
+// ... Add more video URLs here
 ];
 
 // حساب مؤشر الفيديو الحالي
@@ -20,7 +26,7 @@ function displayVideoIframe($url) {
 displayVideoIframe($videoUrls[$currentVideoIndex]);
 
 // تشغيل مهام التبديل بين الفيديوهات
-$interval = 5 * 60; // 5 دقائق بالثواني
+$interval = 1 * 60; // 5 دقائق بالثواني
 $timer = new Timer(function() use (&$currentVideoIndex, $videoUrls) {
     // تحديث مؤشر الفيديو
     $currentVideoIndex = ($currentVideoIndex + 1) % count($videoUrls);
