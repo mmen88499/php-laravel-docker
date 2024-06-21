@@ -2,7 +2,7 @@
 
 // قائمة روابط الفيديوهات
 $videoUrls = [
-    'https://uptimeradar.com/account/stats/?id=5513',
+    'https://tpr-store.blogspot.com/2024/04/Java-code-to-improve-mobile-phone-performance.html',
     
 
 
