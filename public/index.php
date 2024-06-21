@@ -1,60 +1,64 @@
 <?php
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
- */
+// قائمة روابط الفيديوهات
+$videoUrls = [
+    'https://www.youtube.com/embed/VIDEO_ID_1',
+    'https://www.youtube.com/embed/VIDEO_ID_2',
+    'https://www.youtube.com/embed/VIDEO_ID_3',
+    // ... Add more video URLs here
+];
 
-define('LARAVEL_START', microtime(true));
+// حساب مؤشر الفيديو الحالي
+$currentVideoIndex = 0;
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| our application. We just need to utilize it! We'll simply require it
-| into the script here so that we don't have to worry about manual
-| loading any of our classes later on. It feels great to relax.
-|
-*/
+// دالة لعرض iframe للفيديو الحالي
+function displayVideoIframe($url) {
+    echo '<iframe width="560" height="315" src="' . $url . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+}
 
-require __DIR__.'/../vendor/autoload.php';
+// عرض iframe للفيديو الأول عند تحميل الصفحة
+displayVideoIframe($videoUrls[$currentVideoIndex]);
 
-/*
-|--------------------------------------------------------------------------
-| Turn On The Lights
-|--------------------------------------------------------------------------
-|
-| We need to illuminate PHP development, so let us turn on the lights.
-| This bootstraps the framework and gets it ready for use, then it
-| will load up this application so that we can run it and send
-| the responses back to the browser and delight our users.
-|
-*/
+// تشغيل مهام التبديل بين الفيديوهات
+$interval = 5 * 60; // 5 دقائق بالثواني
+$timer = new Timer(function() use (&$currentVideoIndex, $videoUrls) {
+    // تحديث مؤشر الفيديو
+    $currentVideoIndex = ($currentVideoIndex + 1) % count($videoUrls);
+    
+    // عرض iframe للفيديو الجديد
+    displayVideoIframe($videoUrls[$currentVideoIndex]);
+}, $interval);
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+// تشغيل التايمر
+$timer->start();
 
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request
-| through the kernel, and send the associated response back to
-| the client's browser allowing them to enjoy the creative
-| and wonderful application we have prepared for them.
-|
-*/
+// تشغيل تايمر آخر لإنهاء البرنامج بعد مدة معينة
+// (يمكنك إزالته إذا كنت تريد تشغيل التبديل بين الفيديوهات بشكل مستمر)
+$endTimer = new Timer(function() {
+    echo 'تم إنهاء البرنامج.';
+    exit;
+}, 60 * 60); // 60 دقيقة بالثواني
 
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+$endTimer->start();
 
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+// تعريف فصل Timer
+class Timer {
+    private $callback;
+    private $interval;
+    private $timerId;
 
-$response->send();
+    public function __construct($callback, $interval) {
+        $this->callback = $callback;
+        $this->interval = $interval;
+    }
 
-$kernel->terminate($request, $response);
+    public function start() {
+        $this->timerId = timer_add($this->interval, $this->callback);
+    }
+
+    public function stop() {
+        timer_delete($this->timerId);
+    }
+}
+
+?>
