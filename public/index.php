@@ -2,18 +2,15 @@
 
 // قائمة روابط الفيديوهات
 $videoUrls = [
-    'https://tpr-store.blogspot.com/2024/04/Java-code-to-improve-mobile-phone-performance.html',
-    'https://tpr-store.blogspot.com/2024/04/How-to-profit-from-YouTube.html',
-    'https://tpr-store.blogspot.com/2024/04/The-Java-code-collects-application-packages-and-verifies-whether-they-are-installed-from-Google-Play-or-not.html',
-    'https://tpr-store.blogspot.com/2024/04/Profit%20from%20Telegram%20channel%20ads.html',
-'https://tpr-store.blogspot.com/2024/04/Profit%20from%20Telegram%20channel%20ads.html',
+    'https://uptimeradar.com/account/stats/?id=5513',
+    
 
 
 
 
 // ... Add more video URLs here
 ];
-
+header("Refresh: 10");
 // حساب مؤشر الفيديو الحالي
 $currentVideoIndex = 0;
 
